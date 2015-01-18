@@ -14,20 +14,6 @@ module.exports = function (grunt, options) {
 			this.BUILD
 		])
 
-		.chromeManifest({
-			options: {
-				buildnumber: true,
-				background: {
-					target: 'scripts/background.js',
-					exclude: [
-						'scripts/chromereload.js'
-					]
-				}
-			},
-			src: this.SRC,
-			dest: this.BUILD
-		})
-
 		.less({
 			options: {},
 			files: [{
@@ -54,6 +40,19 @@ module.exports = function (grunt, options) {
 			}]
 		})
 
+		.jade({
+			options: {
+
+			},
+			files: [{
+				expand: true,
+				src: '*.jade',
+				cwd: this.SRC,
+				ext: '.html',
+				dest: this.BUILD
+			}]
+		})
+
 		.copy({
 			files: [
 				{
@@ -73,14 +72,30 @@ module.exports = function (grunt, options) {
 					dest: this.BUILD,
 					src: [
 						'*.{ico,txt,png,html}',
-						'images/**.{gif,jpeg,jpg,png,webp,gif}',
+						'images/**/*.{gif,jpeg,jpg,png,webp,gif}',
 						'styles/**/*.css',
 						'scripts/**/*.js',
 						'fonts/**/*.{woff,eot,otf,ttf,svg}',
 						'_locales/**/*.json'
 					]
+				},
+				{
+					dest: this.BUILD + '/manifest.json',
+					src: this.SRC + '/manifest.json'
 				}
 			]
+		})
+
+		.chromeManifest({
+			options: {
+				buildnumber: true,
+				background: {
+					target: 'scripts/background.js',
+					exclude: []
+				}
+			},
+			src: this.BUILD,
+			dest: this.BUILD
 		})
 
 		.concat({
