@@ -6,4 +6,15 @@ module.exports = function (grunt, options) {
 		'install',
 		'build'
 	]);
+
+	this.watch({
+		files: [
+			this.SRC + '/**/*',
+			'!' + this.SRC + '/manifest.json'
+		],
+		tasks: [
+			'install',
+			'build'
+		]
+	})
 };

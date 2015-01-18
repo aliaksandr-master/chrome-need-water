@@ -31,6 +31,13 @@ module.exports = require('grunto')(function (grunt) {
 				diff: false,
 				map: false
 			}
+		},
+
+		watch: {
+			options: {
+				interrupt: true,
+				spawn: false
+			}
 		}
 	};
 });
