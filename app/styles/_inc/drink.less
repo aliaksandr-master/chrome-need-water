@@ -25,9 +25,29 @@
 	border: 2px solid #ccc;
 	border-radius: 10px;
 	cursor: pointer;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+	position: relative;
+	background: #ffffff;
+	overflow: hidden;
 
 	.b-drink__elm:checked + & {
 		border-color: #4e9dff;
+		box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+	}
+
+	&:hover {
+		border-color: #92b8ff;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		width: 200%;
+		height: 200%;
+		bottom: 20%;
+		left: 30%;
+		background: rgba(255, 255, 255, 0.5);
+		border-radius: 100%;
 	}
 }
 

@@ -7,23 +7,24 @@ mixin drink(name, selected)
 				img.b-drink__img(src="images/drink/" + name + '.png')
 			.b-drink__title
 				block
-mixin glass-segment(name, selected)
-	.b-glass__segment(class="b-glass__segment_" + name)
-		input.b-glass__segment-elm(type="radio",name="glass",class="b-glass__segment-elm_" + name,id="b-radio-glass-" + name,value=name,checked=!!selected)
-		label.b-glass__segment-label(for="b-radio-glass-" + name,class="b-glass__segment-label_" + name)
+mixin glass-segment(modif, value, selected)
+	.b-glass__segment(class="b-glass__segment_" + modif)
+		input.b-glass__segment-elm(type="radio",name="glass",class="b-glass__segment-elm_" + modif,id="b-radio-glass-" + modif,value=value,checked=!!selected)
+		label.b-glass__segment-label(for="b-radio-glass-" + modif,class="b-glass__segment-label_" + modif)
 			block
 html
 	head
 		link(href="styles/vendor.css",rel="stylesheet")
 		link(href="styles/popup.css",rel="stylesheet")
 	body
-		form#liquidForm(onsubmit="return false;")
+		#liqudPopup
 			br
 			.b-drinks
 				+drink('water',true) Water
 				+drink('coffee') Coffee
 				+drink('tea') Tea
 				+drink('juice') Juice
+				+drink('milk') Milk
 				+drink('energy') Energy
 				+drink('soda') Soda
 				+drink('other') Other
@@ -31,20 +32,45 @@ html
 			br
 			.b-glass
 				.b-glass__shape
-					+glass-segment(3) ~500 ml
-					+glass-segment(2) ~375 ml
-					+glass-segment(1, true) ~250 ml
-					+glass-segment(0) ~125 ml
+					+glass-segment(3, 500) ~500 ml
+					+glass-segment(2, 375) ~375 ml
+					+glass-segment(1, 250, true) ~250 ml
+					+glass-segment(0, 125) ~125 ml
 			br
 			br
 			.row.clearfix
-				.col-xs-3
-					button.btn.btn-default.pull-left(type="button",style="margin-left: 16px;")
-						| Statistic&nbsp;
-						.label.label-success(style="font-weight: normal; text-shadow: none;") today 0%
-				.col-xs-6.text-center
+				.col-xs-6.text-left
+					button#liqudPopupSave.btn.btn-primary(type="button",style="margin-left: 16px;") Save
+				.col-xs-6.text-right
 					.btn-group
-						button.btn.btn-primary(type="submit",style="width: 100px;") Save
-						button.btn.btn-default(type="button",style="width: 100px;") Cancel
+						button#liqudPopupStat.btn.btn-default.pull-left(type="button",data-toggle="modal" data-target="#modalStat")
+							| Statistic&nbsp;
+							.label.label-success(style="font-weight: normal; text-shadow: none;") today&nbsp;
+								span#liqudPopupStatToday 0
+								| %
+						button#liqudPopupCancel.btn.btn-default(type="button",style="margin-right: 16px;") Cancel
+
+		.modal.fade#modalStat
+			.modal-dialog
+			.modal-content
+				.modal-header
+					button(type="button",data-dismiss="modal").close
+						span &times;
+					h4.modal-title Today&nbsp;
+						span#modalStatTitle
+				.modal-body
+					table.table.table-hover.table-striped
+						colgroup
+							col(width="1%")
+							col(width="")
+							col(width="")
+							col(width="1%")
+						thead
+							tr
+								th Time
+								th Drink name
+								th Volume
+								th Value
+						tbody#modalStatBody
 		script(src="scripts/vendor.js")
 		script(src="scripts/popup.js")
