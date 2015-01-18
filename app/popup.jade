@@ -1,23 +1,50 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link href="styles/vendor.css" rel="stylesheet">
-		<link href="styles/popup.css" rel="stylesheet">
-    </head>
-    <body>
-		<div class="b-drink">
-			input(type="radio",selected)
-			<label for=""></label>
-		</div>
-
-		<div class="b-glass">
-			<div class="b-glass__shape">
-				<span class="b-glass__"></span>
-			</div>
-		</div>
-
-		<script src="scripts/vendor.js"></script>
-        <script src="scripts/popup.js"></script>
-    </body>
-</html>
+doctype html
+mixin drink(name, selected)
+	.b-drink
+		input.b-drink__elm(type="radio",name="drink",value=name,class="b-drink__elm_" + name,id="b-radio-drink-" + name,checked=!!selected)
+		label.b-drink__label(for="b-radio-drink-" + name,class="b-drink__label_" + name,title=name)
+			.b-drink__img-wr
+				img.b-drink__img(src="images/drink/" + name + '.png')
+			.b-drink__title
+				block
+mixin glass-segment(name, selected)
+	.b-glass__segment(class="b-glass__segment_" + name)
+		input.b-glass__segment-elm(type="radio",name="glass",class="b-glass__segment-elm_" + name,id="b-radio-glass-" + name,value=name,checked=!!selected)
+		label.b-glass__segment-label(for="b-radio-glass-" + name,class="b-glass__segment-label_" + name)
+			block
+html
+	head
+		link(href="styles/vendor.css",rel="stylesheet")
+		link(href="styles/popup.css",rel="stylesheet")
+	body
+		form#liquidForm(onsubmit="return false;")
+			br
+			.b-drinks
+				+drink('water',true) Water
+				+drink('coffee') Coffee
+				+drink('tea') Tea
+				+drink('juice') Juice
+				+drink('energy') Energy
+				+drink('soda') Soda
+				+drink('other') Other
+			br
+			br
+			.b-glass
+				.b-glass__shape
+					+glass-segment(3) ~500 ml
+					+glass-segment(2) ~375 ml
+					+glass-segment(1, true) ~250 ml
+					+glass-segment(0) ~125 ml
+			br
+			br
+			.row.clearfix
+				.col-xs-3
+					button.btn.btn-default.pull-left(type="button",style="margin-left: 16px;")
+						| Statistic&nbsp;
+						.label.label-success(style="font-weight: normal; text-shadow: none;") today 0%
+				.col-xs-6.text-center
+					.btn-group
+						button.btn.btn-primary(type="submit",style="width: 100px;") Save
+						button.btn.btn-default(type="button",style="width: 100px;") Cancel
+		script(src="scripts/vendor.js")
+		script(src="scripts/popup.js")

@@ -1,0 +1,47 @@
+@import "../_base/index";
+
+@drinkSize: 50px;
+
+.b-drinks {
+	text-align: center;
+}
+
+.b-drink {
+	display: inline-block;
+
+	+ .b-drink {
+		margin-left: 3px;
+	}
+}
+
+.b-drink__elm {
+	display: none;
+}
+
+.b-drink__label {
+	display: block;
+	font-weight: normal;
+	padding: 5px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	cursor: pointer;
+
+	.b-drink__elm:checked + & {
+		border-color: #4e9dff;
+	}
+}
+
+.b-drink__img-wr {
+	width: @drinkSize;
+	height: @drinkSize;
+}
+
+.b-drink__img {
+	max-width: 100%;
+	max-height: 100%;
+	margin: 0 auto;
+}
+
+.b-drink__title {
+
+}

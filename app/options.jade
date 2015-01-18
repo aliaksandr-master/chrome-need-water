@@ -1,17 +1,24 @@
-<!doctype html>
-<html>
-    <head>
-		<meta charset="utf-8">
-        <link href="styles/vendor.css" rel="stylesheet">
-        <link href="styles/options.css" rel="stylesheet">
-    </head>
-    <body>
-		<button type="button" class="btn btn-success">
-			<span class="glyphicon glyphicon-plus"></span>
-			Hello World
-		</button>
+doctype html
+html
+	head
+		link(href="styles/vendor.css",rel="stylesheet")
+		link(href="styles/options.css",rel="stylesheet")
+	body
 
-        <script src="scripts/vendor.js"></script>
-        <script src="scripts/options.js"></script>
-    </body>
-</html>
+		.container
+			br
+			br
+			.row
+				form.col-md-offset-3.col-md-6
+					label Set your day goal (m):
+					select.form-control
+						option(value=5) 5 liters
+						option(value=4) 4 liters
+						option(value=3,selected) 3 liters
+						option(value=2) 2 liters
+						option(value=1) 1 liter
+					br
+					br
+					button(type="submit").btn.btn-lg.btn-success Save
+		script(src="scripts/vendor.js")
+		script(src="scripts/options.js")
