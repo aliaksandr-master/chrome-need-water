@@ -54,13 +54,6 @@ module.exports = function (grunt, options) {
 			}]
 		})
 
-		//.concat({
-		//	files: [{
-		//		src: [],
-		//		dest: ''
-		//	}]
-		//})
-
 		.copy({
 			files: [
 				{
@@ -88,6 +81,33 @@ module.exports = function (grunt, options) {
 					]
 				}
 			]
+		})
+
+		.concat({
+			options: {
+				stripBanners: true
+			},
+			files: [{
+				src: [
+					this.SRC + '/bower_components/jquery/dist/jquery.min.js',
+					this.SRC + '/bower_components/lodash/dist/lodash.min.js',
+					this.SRC + '/bower_components/moment/min/moment.min.js',
+					this.SRC + '/bower_components/bootstrap-less/js/transition.js',
+					this.SRC + '/bower_components/bootstrap-less/js/alert.js',
+					this.SRC + '/bower_components/bootstrap-less/js/button.js',
+					this.SRC + '/bower_components/bootstrap-less/js/carousel.js',
+					this.SRC + '/bower_components/bootstrap-less/js/collapse.js',
+					this.SRC + '/bower_components/bootstrap-less/js/dropdown.js',
+					this.SRC + '/bower_components/bootstrap-less/js/modal.js',
+					this.SRC + '/bower_components/bootstrap-less/js/tooltip.js',
+					this.SRC + '/bower_components/bootstrap-less/js/popover.js',
+					this.SRC + '/bower_components/bootstrap-less/js/scrollspy.js',
+					this.SRC + '/bower_components/bootstrap-less/js/tab.js',
+					this.SRC + '/bower_components/bootstrap-less/js/affix.js',
+					this.SRC + '/scripts/vendor.js'
+				],
+				dest: this.BUILD + '/scripts/vendor.js'
+			}]
 		})
 	;
 
