@@ -15,7 +15,7 @@ module.exports = function (grunt, options) {
 		.imagemin({
 			files: [{
 				expand: true,
-				cwd: this.SRC + '/images',
+				cwd: this.BUILD + '/images',
 				src: '**/*.{gif,jpeg,jpg,png}',
 				dest: this.BUILD + '/images'
 			}]
@@ -24,7 +24,7 @@ module.exports = function (grunt, options) {
 		.svgmin({
 			files: [{
 				expand: true,
-				cwd: this.SRC + '/images',
+				cwd: this.BUILD + '/images',
 				src: '**/*.svg',
 				dest: this.BUILD + '/images'
 			}]
@@ -43,7 +43,7 @@ module.exports = function (grunt, options) {
 			},
 			files: [{
 				expand: true,
-				cwd: this.SRC,
+				cwd: this.BUILD,
 				src: '*.html',
 				dest: this.BUILD
 			}]
