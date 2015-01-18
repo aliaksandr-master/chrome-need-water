@@ -1,6 +1,8 @@
 {
   "name": "need-water-extension",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap-less": "~3.2.0"
+  },
   "devDependencies": {}
 }
