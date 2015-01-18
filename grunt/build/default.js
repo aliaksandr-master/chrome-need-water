@@ -1,5 +1,7 @@
 "use strict";
 
+var path = require('path');
+
 module.exports = function (grunt, options) {
 
 	this
@@ -35,6 +37,7 @@ module.exports = function (grunt, options) {
 					'**/*.less',
 					'!_*/**/*.less'
 				],
+				ext: '.css',
 				dest: this.BUILD + '/styles'
 			}]
 		})
@@ -59,20 +62,32 @@ module.exports = function (grunt, options) {
 		//})
 
 		.copy({
-			files: [{
-				expand: true,
-				dot: true,
-				cwd: this.SRC,
-				dest: this.BUILD,
-				src: [
-					'*.{ico,txt,png,html}',
-					'images/**.{gif,jpeg,jpg,png,webp,gif}',
-					'styles/**/*.css',
-					'scripts/**/*.js',
-					'fonts/**/*.{woff,otf,ttf,svg}',
-					'_locales/**/*.json'
-				]
-			}]
+			files: [
+				{
+					expand: true,
+					cwd: this.SRC + '/bower_components',
+					dest: this.BUILD + '/fonts',
+					src: [
+						'**/fonts/*.{woff,eot,otf,ttf,svg}'
+					],
+					rename: function (cwd, file) {
+						return path.join(cwd, file.replace('/fonts', ''));
+					}
+				},
+				{
+					expand: true,
+					cwd: this.SRC,
+					dest: this.BUILD,
+					src: [
+						'*.{ico,txt,png,html}',
+						'images/**.{gif,jpeg,jpg,png,webp,gif}',
+						'styles/**/*.css',
+						'scripts/**/*.js',
+						'fonts/**/*.{woff,eot,otf,ttf,svg}',
+						'_locales/**/*.json'
+					]
+				}
+			]
 		})
 	;
 
