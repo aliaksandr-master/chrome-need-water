@@ -19,7 +19,7 @@ var drink = {
 	var today = moment().format('YYYYMMDD');
 	var todayCellName = 'day-' + today;
 
-	var udpdateStatCounter = function () {
+	var udpdateStatCounter = function (f) {
 		chrome.storage.sync.get(todayCellName, function (object) {
 			if (_.isEmpty(object[todayCellName])) {
 				object[todayCellName] = {
@@ -56,6 +56,8 @@ var drink = {
 					'</tr>'
 				);
 			});
+
+			f && f();
 		});
 	};
 
@@ -87,7 +89,9 @@ var drink = {
 			});
 
 			chrome.storage.sync.set(object, function (items) {
-				udpdateStatCounter();
+				udpdateStatCounter(function () {
+					window.close();
+				});
 			});
 		});
 
